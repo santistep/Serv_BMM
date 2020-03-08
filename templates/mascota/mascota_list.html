@@ -11,7 +11,8 @@
 			<td>Genero</td>
 			<td>Edad</td>
 			<td>Descripcion</td>
-			<td>Usuario</td>
+			<td>Usuario
+            <td>Acciones</td>
 		</tr>
 
 	</thead>
@@ -26,6 +27,10 @@
 			<td>{{ mascota.edad }}</td>
    			<td>{{ mascota.descripcion }}</td>
             <td>{{ mascota.usuario.nombre }} {{ mascota.usuario.apellido }}</td>
+			<td>
+				<a class="btn btn-primary" href="{% url 'mascota_editar' mascota.id %}">Editar</a>
+				<a class="btn btn-danger" href="{% url 'mascota_eliminar' mascota.id %}">Eliminar</a>
+			</td>
 		</tr>
 		{% endfor %}
 
@@ -38,12 +43,12 @@
 <ul class="pager">
 	<li>
 		{% if page_obj.has_previous %}
-       	 <a href="?page={{ page_obj.previous_page_number }}">Previous</a>
+       	 <a href="?page={{ page_obj.previous_page_number }}">Anterior</a>
 		{% endif %}
         </li>
 	<li>
 		{% if page_obj.has_next %}
-     	 <a href="?page={{ page_obj.next_page_number }}">Next</a>
+     	 <a href="?page={{ page_obj.next_page_number }}">Siguiente</a>
     	{% endif %}
     </li>
 </ul>
