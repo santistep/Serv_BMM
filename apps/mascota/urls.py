@@ -12,5 +12,4 @@ urlpatterns = [
     path('listar/', mascota_list, name='mascota_listar'),
     path('editar/<int:id_mascota>/', mascota_edit, name='mascota_editar'),
     path('eliminar/<int:id_mascota>/', mascota_delete, name='mascota_eliminar'),
-
 ]

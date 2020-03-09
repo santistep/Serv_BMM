@@ -1,0 +1,52 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+
+<table class="table table-bordered">
+	<thead>
+		<tr>
+			<td>#</td>
+			<td>Nombre</td>
+			<td>Raza</td>
+			<td>Genero</td>
+			<td>Edad</td>
+			<td>Descripcion</td>
+		</tr>
+
+	</thead>
+	<tbody>
+		{% if mascotas %}
+		{% for mascota in mascotas %}
+		<tr>
+			<td>{{ mascota.id }}</td>
+			<td>{{ mascota.nombre }}</td>
+			<td>{{ mascota.raza }}</td>
+			<td>{{ mascota.genero }}</td>
+			<td>{{ mascota.edad }}</td>
+   			<td>{{ mascota.descripcion }}</td>
+			<td>
+				<a class="btn btn-primary" href="{% url 'perdido_editar' mascota.id %}">Editar</a>
+				<a class="btn btn-danger" href="{% url 'perdido_eliminar' mascota.id %}">Eliminar</a>
+			</td>
+		</tr>
+		{% endfor %}
+
+		{% else %}
+		<h1>No hay registros de mascotas perdidas</h1>
+
+		{% endif %}
+	</tbody>
+</table>
+<ul class="pager">
+	<li>
+		{% if page_obj.has_previous %}
+       	 <a href="?page={{ page_obj.previous_page_number }}">Anterior</a>
+		{% endif %}
+        </li>
+	<li>
+		{% if page_obj.has_next %}
+     	 <a href="?page={{ page_obj.next_page_number }}">Siguiente</a>
+    	{% endif %}
+    </li>
+</ul>
+{% endblock%}
