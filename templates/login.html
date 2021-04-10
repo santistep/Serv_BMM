@@ -1,0 +1,40 @@
+{% extends 'base/base.html' %}
+
+{% block title %}
+Login
+{% endblock %}
+
+{% block content %}
+<div>
+Inicio de sesión
+</div
+<div class="login-form">
+	<form method="POST">
+		{% csrf_token %}
+		<div class="row">
+			<div class="col-md-6 col-md-offset-3">
+				<div class="form-group">
+					<label for="username">Nombre de usuario:</label>
+					<input class="form-control" type="text" placeholder="Nombre de usuario" name="username">
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-6 col-md-offset-3">
+				<div class="form-group">
+					<label for="username">Contraseña:</label>
+					<input class="form-control" type="password" placeholder="Contraseña" name="password">
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-6 col-md-offset-3">
+				<div class="form-group">
+					<input class="btn btn-primary" type="submit" value="Iniciar Sesion">
+				</div>
+			</div>
+		</div>
+	</form>
+</div>
+
+{% endblock %}

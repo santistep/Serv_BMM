@@ -1,98 +1,123 @@
-{% load staticfiles %}
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
+
+
 <head>
-    <meta charset="UTF-8">
+    <meta charset=ISO-8859-1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/customcss.css' %}">
 
     {% block extrahead %}
     {% endblock %}
 
-    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
-
-    <title>{% block title %} Document {% endblock%}</title>
+    <title>{% block title %} BuscandoMiMascota {% endblock%}</title>
 </head>
 
 <body>
-
-<!-    {% block header %}
-    {% include 'base/header.html' %} ->
-
-<div class="container">
-
-    {% block navbar %}
-        <div class="bs-docs-section clearfix">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="bs-component">
-                        <nav class="navbar navbar-default">
-                            <div class="container-fluid">
-                                <div class="navbar-header">
-                                    <a class="navbar-brand" href="{% url 'index' %}">Home</a>
-                                </div>
-                                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                                    <ul class="nav navbar-nav">
-                                        <li class="dropdown">
-                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Mascotas<span class="caret"></span></a>
-                                            <ul class="dropdown-menu" role="menu">
-                                                <li><a href="{% url 'mascota_crear' %}">Agregar </a></li>
-                                                <li><a href="{% url 'mascota_listar' %}">Listar</a></li>
-                                            </ul>
-                                        </li>
-                                        <li class="dropdown">
-                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Perdidos<span class="caret"></span></a>
-                                            <ul class="dropdown-menu" role="menu">
-                                                <li><a href="{% url 'mascota_crear' %}">Agregar </a></li>
-                                                <li><a href="{% url 'mascota_listar' %}">Listar</a></li>
-                                            </ul>
-                                        </li>
-                                        <li class="dropdown">
-                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Encontrados<span class="caret"></span></a>
-                                            <ul class="dropdown-menu" role="menu">
-                                                <li><a href="{% url 'mascota_crear' %}">Agregar </a></li>
-                                                <li><a href="{% url 'mascota_listar' %}">Listar</a></li>
-                                            </ul>
-                                        </li>
-                                        <li class="dropdown">
-                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Usuarios<span class="caret"></span></a>
-                                            <ul class="dropdown-menu" role="menu">
-                                                <li><a href="{#}">Perfil</a></li>
-                                                <li><a href="{#}">Tus Perdidos</a></li>
-                                                <li><a href="{#}">Tus Encontrados</a></li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                    <ul class="nav navbar-nav navbar-right">
-                                        <li class="dropdown">
-                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Opciones<span class="caret"></span></a>
-                                            <ul class="dropdown-menu" role="menu">
-                                                <li><a href="{% url 'index' %}">Salir</a></li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </nav>
-                    </div>
-                </div>
+     
+    <div style="width: 90%; display: table; position: center;">
+        <div style="display: table-row">
+            <div style="width: 150px; height: 200px; display: table-cell;">
+                <img src="{% static "img/petfinder.png" %}" alt="Logo" id="petfinder">
             </div>
+            <div style="display: table-cell;">
+
+                
+                <nav class="navbar navbar-default">
+                    <div class="container-fluid">
+                        <!-- Brand and toggle get grouped for better mobile display -->
+                        <div class="navbar-header">
+                          
+                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                                data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                                   </div>
+                            {% block navbar %}
+                
+                        
+
+                        <!-- Collect the nav links, forms, and other content for toggling -->
+                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                      
+                             
+                            <ul class="nav navbar-nav">
+                                
+                              
+                                
+   
+                            </ul>
+                             
+                            <ul class="nav navbar-nav navbar-right">
+                            <a class="navbar-brand" href="{% url 'index' %}">Inicio</a>  
+                            <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                        aria-expanded="false">Mascotas<span class="caret"></span></a>
+                            
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li><a href="{% url 'mascota_crear' %}">Agregar una mascota </a></li>
+                                        <li><a href="{% url 'mascota_listar' %}">Lista de mascotas agregadas</a></li>
+                                    </ul>
+                                
+                                </li>
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                        aria-expanded="false">Perdidos<span class="caret"></span></a>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li><a href="{% url 'perdido_crear' %}">Agregar mascotas perdidas </a></li>
+                                        <li><a href="{% url 'perdido_listar' %}">Lista de mascotas perdidas</a></li>
+                                        
+                                    </ul>
+                                    
+                                </li> 
+                           
+                            
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                        aria-expanded="false">Opciones<span class="caret"></span></a>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li><a href="{% url 'login' %}">Login</a></li>
+                                        <li><a href="{% url 'logged_out' %}">Logout</a></li>
+                                        <li><a href="{% url 'registrar' %}">Registrarse</a></li>
+
+                                    </ul>
+                                </li>
+                            </ul>
+                            
+                        </div><!-- /.navbar-collapse -->
+                    </div><!-- /.container-fluid -->
+                </nav>
+
+               
+
+                {% endblock %}
+                {% block content %}
+                {% endblock %}
+            </div>
+
         </div>
-    {% endblock %}
 
-<!-    {% endblock %} ->
+    </div>
 
-    {% block content %}
-    {% endblock %}
+   	
 
-    {% block footer %}
-    {% endblock %}
-
-</div>
-
-    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-    <script src="{% static 'js/bootstrap.min.js' %}"></script>
-
-    {% block extrajs %}
-    {% endblock %}
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"
+        integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous">
+    </script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
+        integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous">
+    </script>
 
 </body>
+
 </html>

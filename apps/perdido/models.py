@@ -1,18 +1,35 @@
-from django.db import models
+from datetime import date
 
-from apps.usuario.models import Usuario
+from django.db import models
+from apps.mascota.models import Mascota
 
 # Create your models here.
 
 
 class Perdido(models.Model):
-    raza = models.CharField(max_length=20)
-    genero = models.CharField(max_length=10)
+
+    fecha_denuncia = models.DateField(default=date.today)
+
     descripcion = models.TextField()
-    fecha_denuncia = models.DateField()
-    usuario = models.ForeignKey(
-        Usuario,
-        null=True,
-        blank=True,
+
+    ciudad = models.CharField(max_length=30)
+
+    barrio = models.CharField(max_length=30)
+
+    contacto = models.CharField(max_length=60, null=False, blank=False)
+
+    mascota = models.ForeignKey(
+        Mascota,
         on_delete=models.CASCADE,
     )
+
+    imagen = models.ImageField(
+        max_length=255,
+        upload_to='imagen/',
+        null=True,
+        blank=True,
+    )
+
+    class Meta:
+
+        ordering = ['ciudad','barrio']

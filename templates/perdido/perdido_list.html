@@ -2,31 +2,44 @@
 
 {% block content %}
 
+<div id="perdistea">
+   <p>&iquestPerdiste a tu mascota? Registrate en la pagina <a href="{% url 'registrar' %}">aqui</a> </p>
+</div>
+
 <table class="table table-bordered">
 	<thead>
 		<tr>
-			<td>#</td>
-			<td>Nombre</td>
-			<td>Raza</td>
-			<td>Genero</td>
-			<td>Edad</td>
+			<td>Fecha denuncia</td>
 			<td>Descripcion</td>
+			<td>Ciudad</td>
+			<td>Barrio</td>
+			<td>Mascota</td>
+			<td>Imágen</td>
+			<td>Contacto</td>
+
+			<td>Acciones</td>
 		</tr>
 
 	</thead>
 	<tbody>
-		{% if mascotas %}
-		{% for mascota in mascotas %}
+		{% if perdidos %}
+		{% for perdido in perdidos %}
 		<tr>
-			<td>{{ mascota.id }}</td>
-			<td>{{ mascota.nombre }}</td>
-			<td>{{ mascota.raza }}</td>
-			<td>{{ mascota.genero }}</td>
-			<td>{{ mascota.edad }}</td>
-   			<td>{{ mascota.descripcion }}</td>
+			<td>{{ perdido.fecha_denuncia }}</td>
+   			<td>{{ perdido.descripcion }}</td>
+   			<td>{{ perdido.ciudad }}</td>
+   			<td>{{ perdido.barrio }}</td>
+			<td>{{ perdido.mascota.nombre }} / {{ perdido.mascota.raza }} / {{ perdido.mascota.genero }} / {{ perdido.mascota.descripcion }} / {{ perdido.mascota.ciudad }} / {{ perdido.mascota.barrio }}</td>
 			<td>
-				<a class="btn btn-primary" href="{% url 'perdido_editar' mascota.id %}">Editar</a>
-				<a class="btn btn-danger" href="{% url 'perdido_eliminar' mascota.id %}">Eliminar</a>
+				{% if perdido.mascota.imagen %}
+				<img src={{perdido.mascota.imagen.url}} height="100"/>
+				{% endif %}
+			</td>
+			<td>{{ perdido.contacto }}</td>
+
+			<td>
+				<a class="btn btn-primary" href="{% url 'perdido_editar' perdido.id %}">Editar</a>
+				<a class="btn btn-danger" href="{% url 'perdido_eliminar' perdido.id %}">Encontrado</a>
 			</td>
 		</tr>
 		{% endfor %}

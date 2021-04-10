@@ -1,0 +1,11 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+<form method="post">
+	{% csrf_token %}
+	<h3>Confirma que encontraron a {{ perdido.mascota.nombre }}!!! </h3>
+	<h5>Se eliminará de la lista de perdidos.</h5>
+	<button class="btn btn-danger" type="submit">Sí, lo encontramos</button>
+	<a class= "btn btn-default" href="{% url 'perdido_listar' %}">Cancelar</a>
+</form>
+{% endblock %}

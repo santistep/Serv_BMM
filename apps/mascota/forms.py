@@ -15,21 +15,75 @@ class MascotaForm(forms.ModelForm):
             'genero',
             'edad',
             'descripcion',
-            'usuario',
+            'ciudad',
+            'barrio',
+            'imagen',
         ]
+
         labels = {
             'nombre': 'Nombre',
             'raza': 'Raza',
             'genero': 'Genero',
             'edad': 'Edad',
             'descripcion': 'Descripcion',
-            'usuario': 'Usuario',
+            'ciudad': 'Ciudad',
+            'barrio': 'Barrio',
+            'imagen': 'Imágen',
         }
+
+        '''
+        VER WIDGETS PARA ELIMINACION LOGICA (boton de estado)
+        '''
+
         widgets = {
-            'nombre': forms.TextInput(attrs={'class': 'form-control'}),
-            'raza': forms.TextInput(attrs={'class': 'form-control'}),
-            'genero': forms.TextInput(attrs={'class': 'form-control'}),
-            'edad': forms.TextInput(attrs={'class': 'form-control'}),
-            'descripcion': forms.TextInput(attrs={'class': 'form-control'}),
-            'usuario': forms.Select(attrs={'class': 'form-control'}),
+            'nombre': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder':'Ingrese el nombre de su mascota',
+                'id': 'nombre'
+            }),
+
+            'raza':
+                forms.TextInput(attrs={
+                    'class': 'form-control',
+                    'placeholder': 'Ingrese la raza de su mascota',
+                    'id': 'raza'
+                }),
+
+            'genero':
+                forms.TextInput(attrs={
+                    'class': 'form-control',
+                    'placeholder': 'Masculino / Femenino',
+                    'id': 'genero'
+                }),
+
+            'edad':
+                forms.TextInput(attrs={
+                    'class': 'form-control',
+                    'placeholder': 'Ingrese la edad de su mascota',
+                    'id': 'edad'
+                }),
+
+            'descripcion': forms.Textarea(attrs={
+                'class': 'form-control',
+                'placeholder': 'Ingrese una breve descripcion',
+                'id':'descripcion'
+            }),
+
+            'ciudad': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder':'Ingrese la ciudad',
+                'id': 'ciudad'
+            }),
+
+            'barrio': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder':'Ingrese el barrio',
+                'id': 'barrio'
+            }),
+
+            'imagen': forms.FileInput(attrs={
+                'class':'FileInput',
+                'id': 'imagen'
+            }),
+
         }

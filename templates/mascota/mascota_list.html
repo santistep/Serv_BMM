@@ -1,45 +1,134 @@
 {% extends 'base/base.html' %}
-
+<p class="ifmascota"> Agregue su Mascota</p>
 {% block content %}
 
-<table class="table table-bordered">
+<table class="table table-bordered" style="width:150px">
+	<!--
 	<thead>
 		<tr>
-			<td>#</td>
 			<td>Nombre</td>
 			<td>Raza</td>
 			<td>Genero</td>
 			<td>Edad</td>
 			<td>Descripcion</td>
-			<td>Usuario
+			<td>Ciudad</td>
+			<td>Barrio</td>
+			<td>Imágen</td>
+
             <td>Acciones</td>
 		</tr>
 
 	</thead>
-	<tbody>
+	-->
+<tbody id="tablabody">
+	
 		{% if mascotas %}
 		{% for mascota in mascotas %}
+
+		<thead>
 		<tr>
-			<td>{{ mascota.id }}</td>
-			<td>{{ mascota.nombre }}</td>
-			<td>{{ mascota.raza }}</td>
-			<td>{{ mascota.genero }}</td>
-			<td>{{ mascota.edad }}</td>
-   			<td>{{ mascota.descripcion }}</td>
-            <td>{{ mascota.usuario.nombre }} {{ mascota.usuario.apellido }}</td>
-			<td>
+			<td>Nombre</td>
+			<td>Raza</td>
+			<td>Genero</td>
+			<td>Edad</td>
+			<td>Descripcion</td>
+			<td>Ciudad</td>
+			<td>Barrio</td>
+			<td>Imágen</td>
+
+            <td>Acciones</td>
+		</tr>
+
+	</thead>
+
+		<div id="tablademascotas">
+			<tr>
+				<td>{{ mascota.nombre }}</td>
+				<td>{{ mascota.raza }}</td>
+				<td>{{ mascota.genero }}</td>
+				<td>{{ mascota.edad }}</td>
+ 				<td>{{ mascota.descripcion }}</td>
+ 				<td>{{ mascota.ciudad }}</td>
+ 				<td>{{ mascota.barrio }}</td>
+				<td>
+					{% if mascota.imagen %}
+					<img src={{mascota.imagen.url}} height="100"/>
+					{% endif %}
+				</td>
+				<td>
 				<a class="btn btn-primary" href="{% url 'mascota_editar' mascota.id %}">Editar</a>
 				<a class="btn btn-danger" href="{% url 'mascota_eliminar' mascota.id %}">Eliminar</a>
+				</td>
+			</tr>
+		</div>
+
+		
+				
+		
+
+		<!--
+		<div class="tablasimg">
+			<div style="display: table-row">
+				<div style="display: table-cell;">
+					<div>
+						<tr>
+							<th>
+								<ul id="gallery">
+									{% if mascota.imagen %}
+									<img src={{mascota.imagen.url}} height="50" id="imgurl"/>
+									{% endif %}
+									
+									<li>
+										<p>{{ mascota.nombre }} | {{ mascota.barrio }}</p>
+									</li>
+
+									<ul>
+										<a class="btn btn-primary" href="{% url 'mascota_editar' mascota.id %}">Editar</a>
+										<a class="btn btn-danger" href="{% url 'mascota_eliminar' mascota.id %}">Eliminar</a>
+									</ul>
+								</ul>
+							</th>
+						</tr>
+					</div>
+				</div>
+			</div>
+		</div>
+		-->
+						<!---
+						<td>{{ mascota.genero }}</td>
+						<td>{{ mascota.edad }}</td>
+ 						<td>{{ mascota.descripcion }}</td>
+ 						<td>{{ mascota.ciudad }}</td>
+ 						<td>{{ mascota.barrio }}</td>
+						
+					</div>
+				</div>
+			</div>
+		</div>
+
+<!--
+		{% for i in '4'|make_list %}
+			<td>
+				{% if mascota.imagen %}
+				<img src={{mascota.imagen.url}} height="100"/>
+				{% endif %}
+				<p>{{ mascota.nombre }} | {{ mascota.barrio }}</p>
 			</td>
+			
+			
+		
+		
+		{% endfor %}
 		</tr>
+-->
 		{% endfor %}
 
 		{% else %}
 		<h1>No hay registros de mascotas</h1>
-
 		{% endif %}
-	</tbody>
+</tbody>
 </table>
+
 <ul class="pager">
 	<li>
 		{% if page_obj.has_previous %}
@@ -52,4 +141,7 @@
     	{% endif %}
     </li>
 </ul>
+
+
 {% endblock%}
+

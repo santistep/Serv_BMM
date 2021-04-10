@@ -1,9 +1,9 @@
 from django.shortcuts import render, redirect
+from django.urls import reverse_lazy
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 
 from apps.perdido.forms import PerdidoForm
 from apps.perdido.models import Perdido
-
-# Create your views here.
 
 
 def redirect_view(request):
@@ -11,42 +11,40 @@ def redirect_view(request):
     return response
 
 
-def index(request):
-    return render(request, 'perdido/index.html')
+class CrearPerdido(CreateView):
+    model = Perdido
+    form_class = PerdidoForm
+    template_name = 'perdido/perdido_form.html'
+    success_url = reverse_lazy('perdido_listar')
 
 
-def perdido_view(request):
-    if request.method == 'POST':
-        form = PerdidoForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('perdido:perdido_listar')
-    else:
-        form = PerdidoForm()
-    return render(request, 'perdido/perdido_form.html', {'form': form})
+class ListadoPerdido(ListView):
+    model = Perdido
+    template_name = 'perdido/perdido_list.html'
+    context_object_name = 'perdidos'
 
 
-def perdido_list(request):
-    perdido = Perdido.objects.all().order_by('id')
-    contexto = {'perdidos': perdido}
-    return render(request, 'perdido/perdido_list.html', contexto)
+class ActualizarPerdido(UpdateView):
+    model = Perdido
+    form_class = PerdidoForm
+    template_name = 'perdido/perdido_form.html'
+    success_url = reverse_lazy('perdido_listar')
 
 
-def perdido_edit(request, id_perdido):
-    perdido = Perdido.objects.get(id=id_perdido)
-    if request.method == 'GET':
-        form = PerdidoForm(instance=perdido)
-    else:
-        form = Perdido(request.POST, instance=perdido)
-        if form.is_valid():
-            form.save()
-        return redirect(perdido_list)
-    return render(request, 'perdido/perdido_form.html', {'form': form})
+class EliminarPerdido(DeleteView):
+    model = Perdido
+    success_url = reverse_lazy(
+        'perdido_listar')  # ELIMINACION LOGICA -Debo sacar este reverse_lazy para redefinir el estado-
 
 
-def perdido_delete(request, id_perdido):
-    perdido = Perdido.objects.get(id=id_perdido)
-    if request.method == 'POST':
-        perdido.delete()
-        return redirect(perdido_list)
-    return render(request, 'perdido/perdido_delete.html', {'perdido': perdido})
+'''
+ELIMINACION LOGICA
+
+Redefino el metodo post para cambiar el estado y no eliminar todo de la base de datos
+
+    def post(self, request, pk, *args, **kwargs):
+        object = Mascota.object.get(id = pk)
+        object.estado = False
+        object.save()
+        return redirect('mascota_listar')
+'''

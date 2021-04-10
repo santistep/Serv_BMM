@@ -10,23 +10,61 @@ class PerdidoForm(forms.ModelForm):
         model = Perdido
 
         fields = [
-            'raza',
-            'genero',
-            'descripcion',
             'fecha_denuncia',
-            'usuario',
+            'descripcion',
+            'mascota',
+            'ciudad',
+            'barrio',
+            'contacto',
+            'imagen'
+
         ]
         labels = {
-            'raza': 'Raza',
-            'genero': 'Genero',
-            'descripcion': 'Descripcion',
             'fecha_denuncia': "Fecha",
-            'usuario': 'Usuario',
+            'descripcion': 'Descripcion',
+            'mascota': 'Mascota',
+            'ciudad': 'Ciudad',
+            'barrio': 'Barrio',
+            'contacto': 'contacto',
+            'imagen': 'Imágen'
+
         }
         widgets = {
-            'raza': forms.TextInput(attrs={'class': 'form-control'}),
-            'genero': forms.TextInput(attrs={'class': 'form-control'}),
-            'descripcion': forms.TextInput(attrs={'class': 'form-control'}),
-            'fecha_denuncia': forms.DateInput(attrs={'class': 'form-control'}),
-            'usuario': forms.Select(attrs={'class': 'form-control'}),
+            'fecha_denuncia': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Fecha actual',# Ver como es el manejo de fecha
+                'id': 'fecha_denuncia'
+            }),
+
+            'descripcion': forms.Textarea(attrs={
+                'class': 'form-control',
+                'placeholder': 'Describa brevemente donde y como se perdio',
+                'id': 'descripcion'
+            }),
+
+            'mascota': forms.Select(attrs={
+                'class': 'form-control',
+                'placeholder': 'Elija la mascota de la lista',# No funciona en vista desplegable?
+                'id': 'mascota'
+            }),
+
+            'ciudad': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Ingrese la ciudad',
+                'id': 'ciudad'
+            }),
+
+            'barrio': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Ingrese el barrio',
+                'id': 'barrio'
+            }),
+
+            'contacto': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Ingrese un medio de contacto',
+                'id': 'contacto'
+
+            }),
+
         }

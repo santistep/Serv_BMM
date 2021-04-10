@@ -1,15 +1,18 @@
 from django.urls import path
+from django.contrib.auth.decorators import login_required
+from .views import redirect_view, AgregarMascotaMovil
 
-from .views import redirect_view
-
-from apps.mascota.views import index
-from apps.mascota.views import mascota_view, mascota_list, mascota_edit, mascota_delete
+from apps.mascota.views import ListadoMascota, ActualizarMascota, CrearMascota, EliminarMascota, \
+    TraerTodasLasMascotasJSON
 
 urlpatterns = [
     path('redirect/', redirect_view),
-    path('', index, name='index'),
-    path('nuevo/', mascota_view, name='mascota_crear'),
-    path('listar/', mascota_list, name='mascota_listar'),
-    path('editar/<int:id_mascota>/', mascota_edit, name='mascota_editar'),
-    path('eliminar/<int:id_mascota>/', mascota_delete, name='mascota_eliminar'),
+    path('nuevo/', login_required(CrearMascota.as_view()), name='mascota_crear'),
+    path('listar/', login_required(ListadoMascota.as_view()), name='mascota_listar'),
+    path('json/', TraerTodasLasMascotasJSON, name='mascota_json'),
+    # pk parametro para buscar (Primary Key generada por django automaticamente)
+    path('editar/<int:pk>/', ActualizarMascota.as_view(), name='mascota_editar'),
+    path('eliminar/<int:pk>/', EliminarMascota.as_view(), name='mascota_eliminar'),
+    path('agregarmascotamovil/', AgregarMascotaMovil, name='mascota_agregar_movil')
+
 ]
