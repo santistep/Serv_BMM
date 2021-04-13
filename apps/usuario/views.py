@@ -1,14 +1,20 @@
+import json
+from uuid import uuid4
+
 from django.contrib.auth.views import LogoutView, auth_logout
 from django.contrib.auth import login
 from django.contrib.auth.models import User
+from django.core.files.base import ContentFile
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView, FormView
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import never_cache
 from django.views.decorators.csrf import csrf_protect
+import base64
 
 from apps.usuario.forms import RegistroForm, FormularioLogin
+from apps.usuario.models import Usuario
 
 
 class RegistroUsuario(CreateView):
@@ -51,7 +57,33 @@ class Logout(LogoutView):
         return super().dispatch(request, *args, **kwargs)
 
 
-def LoginMovil(request):
-    print('Datos enviados : "%s"' % request.body)
-    return HttpResponse("Ok")
 
+
+def LoginMovil(request):
+    datos = json.loads(request.body)
+    email = datos['email']
+    contrasena = datos['contrasena']
+    if Usuario.objects.filter(email=email).exists():
+        usuario_existente = Usuario.objects.get(email=email)
+        if usuario_existente.contrasena == contrasena:
+            respuesta = '0'
+        else:
+            respuesta = '2'
+    else:
+        respuesta = '1'
+    return HttpResponse(respuesta)
+
+
+def RegistroUsuarioMovil(request):
+    datos = json.loads(request.body)
+    if Usuario.objects.filter(email=datos['email']).exists():
+        respuesta = "1"
+    else:
+        usuario = Usuario()
+        usuario.nombre_usuario = datos['nombre_usuario']
+        usuario.email = datos['email']
+        usuario.contrasena = datos['contrasena']
+        usuario.telefono = datos['telefono']
+        usuario.save()
+        respuesta = '0'
+    return HttpResponse(respuesta)

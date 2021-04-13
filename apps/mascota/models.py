@@ -9,11 +9,12 @@ class Mascota(models.Model):
     color = models.CharField(max_length=30, null=True)
     edad = models.IntegerField()
     genero = models.CharField(max_length=10)
-    tamaño = models.CharField(max_length=10, null=True)
+    tamano = models.CharField(max_length=10, null=True)
     recompensa = models.IntegerField(null=True)
     descripcion = models.TextField(null=True)
-    ciudad = models.CharField(max_length=30)
-    barrio = models.CharField(max_length=30)
+    ciudad = models.CharField(max_length=30, null=True)
+    barrio = models.CharField(max_length=30, null=True)
+    ultima_posicion_conocida = models.CharField(max_length=60, null=True)
 
     # estado = models.BooleanField('Estado', default= True) ELIMINACION LOGICA
 
