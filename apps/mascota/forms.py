@@ -15,8 +15,6 @@ class MascotaForm(forms.ModelForm):
             'genero',
             'edad',
             'descripcion',
-            'ciudad',
-            'barrio',
             'imagen',
         ]
 
@@ -26,8 +24,6 @@ class MascotaForm(forms.ModelForm):
             'genero': 'Genero',
             'edad': 'Edad',
             'descripcion': 'Descripcion',
-            'ciudad': 'Ciudad',
-            'barrio': 'Barrio',
             'imagen': 'Imágen',
         }
 
@@ -67,18 +63,6 @@ class MascotaForm(forms.ModelForm):
                 'class': 'form-control',
                 'placeholder': 'Ingrese una breve descripcion',
                 'id':'descripcion'
-            }),
-
-            'ciudad': forms.TextInput(attrs={
-                'class': 'form-control',
-                'placeholder':'Ingrese la ciudad',
-                'id': 'ciudad'
-            }),
-
-            'barrio': forms.TextInput(attrs={
-                'class': 'form-control',
-                'placeholder':'Ingrese el barrio',
-                'id': 'barrio'
             }),
 
             'imagen': forms.FileInput(attrs={

@@ -32,8 +32,6 @@
 			<td>Genero</td>
 			<td>Edad</td>
 			<td>Descripcion</td>
-			<td>Ciudad</td>
-			<td>Barrio</td>
 			<td>Imágen</td>
 
             <td>Acciones</td>
@@ -47,9 +45,6 @@
 				<td>{{ mascota.raza }}</td>
 				<td>{{ mascota.genero }}</td>
 				<td>{{ mascota.edad }}</td>
- 				<td>{{ mascota.descripcion }}</td>
- 				<td>{{ mascota.ciudad }}</td>
- 				<td>{{ mascota.barrio }}</td>
 				<td>
 					{% if mascota.imagen %}
 					<img src={{mascota.imagen.url}} height="100"/>

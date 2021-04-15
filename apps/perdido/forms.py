@@ -11,21 +11,15 @@ class PerdidoForm(forms.ModelForm):
 
         fields = [
             'fecha_denuncia',
-            'descripcion',
             'mascota',
-            'ciudad',
-            'barrio',
-            'contacto',
+            'ultima_posicion_conocida',
             'imagen'
 
         ]
         labels = {
             'fecha_denuncia': "Fecha",
-            'descripcion': 'Descripcion',
             'mascota': 'Mascota',
-            'ciudad': 'Ciudad',
-            'barrio': 'Barrio',
-            'contacto': 'contacto',
+            'ultima_posicion_conocida': 'Ultima direccion en donde se vio a la mascota',
             'imagen': 'Imágen'
 
         }
@@ -36,35 +30,18 @@ class PerdidoForm(forms.ModelForm):
                 'id': 'fecha_denuncia'
             }),
 
-            'descripcion': forms.Textarea(attrs={
-                'class': 'form-control',
-                'placeholder': 'Describa brevemente donde y como se perdio',
-                'id': 'descripcion'
-            }),
-
             'mascota': forms.Select(attrs={
                 'class': 'form-control',
                 'placeholder': 'Elija la mascota de la lista',# No funciona en vista desplegable?
                 'id': 'mascota'
             }),
 
-            'ciudad': forms.TextInput(attrs={
+            'ultima_posicion_conocida': forms.TextInput(attrs={
                 'class': 'form-control',
-                'placeholder': 'Ingrese la ciudad',
+                'placeholder': 'Ingrese la ultima direccion en la que vio a su mascota',
                 'id': 'ciudad'
-            }),
+            })
 
-            'barrio': forms.TextInput(attrs={
-                'class': 'form-control',
-                'placeholder': 'Ingrese el barrio',
-                'id': 'barrio'
-            }),
 
-            'contacto': forms.TextInput(attrs={
-                'class': 'form-control',
-                'placeholder': 'Ingrese un medio de contacto',
-                'id': 'contacto'
-
-            }),
 
         }

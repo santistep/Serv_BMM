@@ -13,6 +13,8 @@ from django.views.decorators.cache import never_cache
 from django.views.decorators.csrf import csrf_protect
 import base64
 
+from pytz import unicode
+
 from apps.usuario.forms import RegistroForm, FormularioLogin
 from apps.usuario.models import Usuario
 
@@ -57,12 +59,10 @@ class Logout(LogoutView):
         return super().dispatch(request, *args, **kwargs)
 
 
-
-
 def LoginMovil(request):
     datos = json.loads(request.body)
-    email = datos['email']
-    contrasena = datos['contrasena']
+    email = datos['inputEmail']
+    contrasena = datos['inputPassword']
     if Usuario.objects.filter(email=email).exists():
         usuario_existente = Usuario.objects.get(email=email)
         if usuario_existente.contrasena == contrasena:
@@ -75,7 +75,10 @@ def LoginMovil(request):
 
 
 def RegistroUsuarioMovil(request):
-    datos = json.loads(request.body)
+    peticion = request.body
+    peticion = unicode(peticion, 'iso-8859-1')
+    datos = json.loads(peticion)
+
     if Usuario.objects.filter(email=datos['email']).exists():
         respuesta = "1"
     else:

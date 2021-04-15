@@ -3,63 +3,61 @@
 {% block content %}
 
 <div id="perdistea">
-   <p>&iquestPerdiste a tu mascota? Registrate en la pagina <a href="{% url 'registrar' %}">aqui</a> </p>
+    <p>&iquestPerdiste a tu mascota? Registrate en la pagina <a href="{% url 'registrar' %}">aqui</a></p>
 </div>
 
 <table class="table table-bordered">
-	<thead>
-		<tr>
-			<td>Fecha denuncia</td>
-			<td>Descripcion</td>
-			<td>Ciudad</td>
-			<td>Barrio</td>
-			<td>Mascota</td>
-			<td>Imágen</td>
-			<td>Contacto</td>
+    <thead>
+    <tr>
+        <td>Fecha denuncia</td>
+        <td>Ultima posicion conocida</td>
+        <td>Mascota</td>
+        <td>Imágen</td>
+        <td>Descripcion</td>
+        <td>Contacto</td>
+        <td>Acciones</td>
+    </tr>
 
-			<td>Acciones</td>
-		</tr>
+    </thead>
+    <tbody>
+    {% if perdidos %}
+    {% for perdido in perdidos %}
+    <tr>
+        <td>{{ perdido.fecha_denuncia }}</td>
+        <td>{{ perdido.ultima_posicion_conocida }}</td>
+        <td>{{ perdido.mascota.nombre }} / {{ perdido.mascota.raza }} / {{ perdido.mascota.genero }} / {{ perdido.mascota.ciudad }} / {{ perdido.mascota.barrio }}
+        </td>
+            <td>
+            {% if perdido.mascota.imagen %}
+            <img src={{perdido.mascota.imagen.url}} height="100"/>
+            {% endif %}
+        </td>
+        <td>{{ perdido.mascota.descripcion }}</td>
+        <td>{{ perdido.mascota.usuario.telefono }}</td>
 
-	</thead>
-	<tbody>
-		{% if perdidos %}
-		{% for perdido in perdidos %}
-		<tr>
-			<td>{{ perdido.fecha_denuncia }}</td>
-   			<td>{{ perdido.descripcion }}</td>
-   			<td>{{ perdido.ciudad }}</td>
-   			<td>{{ perdido.barrio }}</td>
-			<td>{{ perdido.mascota.nombre }} / {{ perdido.mascota.raza }} / {{ perdido.mascota.genero }} / {{ perdido.mascota.descripcion }} / {{ perdido.mascota.ciudad }} / {{ perdido.mascota.barrio }}</td>
-			<td>
-				{% if perdido.mascota.imagen %}
-				<img src={{perdido.mascota.imagen.url}} height="100"/>
-				{% endif %}
-			</td>
-			<td>{{ perdido.contacto }}</td>
+        <td>
+            <a class="btn btn-primary" href="{% url 'perdido_editar' perdido.id %}">Editar</a>
+            <a class="btn btn-danger" href="{% url 'perdido_eliminar' perdido.id %}">Encontrado</a>
+        </td>
+    </tr>
+    {% endfor %}
 
-			<td>
-				<a class="btn btn-primary" href="{% url 'perdido_editar' perdido.id %}">Editar</a>
-				<a class="btn btn-danger" href="{% url 'perdido_eliminar' perdido.id %}">Encontrado</a>
-			</td>
-		</tr>
-		{% endfor %}
+    {% else %}
+    <h1>No hay registros de mascotas perdidas</h1>
 
-		{% else %}
-		<h1>No hay registros de mascotas perdidas</h1>
-
-		{% endif %}
-	</tbody>
+    {% endif %}
+    </tbody>
 </table>
 <ul class="pager">
-	<li>
-		{% if page_obj.has_previous %}
-       	 <a href="?page={{ page_obj.previous_page_number }}">Anterior</a>
-		{% endif %}
-        </li>
-	<li>
-		{% if page_obj.has_next %}
-     	 <a href="?page={{ page_obj.next_page_number }}">Siguiente</a>
-    	{% endif %}
+    <li>
+        {% if page_obj.has_previous %}
+        <a href="?page={{ page_obj.previous_page_number }}">Anterior</a>
+        {% endif %}
+    </li>
+    <li>
+        {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}">Siguiente</a>
+        {% endif %}
     </li>
 </ul>
 {% endblock%}

@@ -3,20 +3,16 @@ from datetime import date
 from django.db import models
 from apps.mascota.models import Mascota
 
+
 # Create your models here.
 
 
 class Perdido(models.Model):
+    fecha_denuncia = models.DateTimeField(null=True)
 
-    fecha_denuncia = models.DateField(default=date.today)
+    recompensa = models.IntegerField(null=True)
 
-    descripcion = models.TextField()
-
-    ciudad = models.CharField(max_length=30)
-
-    barrio = models.CharField(max_length=30)
-
-    contacto = models.CharField(max_length=60, null=False, blank=False)
+    ultima_posicion_conocida = models.CharField(max_length=60, null=True)
 
     mascota = models.ForeignKey(
         Mascota,
@@ -30,6 +26,4 @@ class Perdido(models.Model):
         blank=True,
     )
 
-    class Meta:
 
-        ordering = ['ciudad','barrio']
