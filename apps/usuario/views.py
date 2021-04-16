@@ -93,10 +93,42 @@ def RegistroUsuarioMovil(request):
     return HttpResponse(respuesta)
 
 def RecoverPasswordMovil(request):
+    #Leo datos json
     datos = json.loads(request.body)
-    email = datos['email']
+
+    #Obtengo dato que quiero
+    email = datos['inputEmailRecover']
+
+    #Chequeo que el usuario este registrado, if True, envio la contraseña por email
+
     if Usuario.objects.filter(email=email).exists():
         usuario_existente = Usuario.objects.get(email=email)
         usuario_password = usuario_existente.contrasena
+
+        #Variables que almacenan el mensaje y el asunto
+        message = f"Hola, esta es tu contraseña {usuario_password}. Te recomendamos cambiarla al reingresar"
+        subject = "Recuperacion Contraseña Footprints"
+
+        message = 'Subject: {}\n\n{}'.format(subject,message)
+
+        # Creo un objeto smtp desde la libreria (servidor de correo, puerto a utilizar)
+        server = smtplib.SMTP('smtp.gmail.com', 25)
+        # Defino el uso del protocolo tls
+        server.starttls()
+        # Autentico con mi cuenta de correo (cuenta, password)
+        server.login('footprintsbmm@gmail.com', 'footprints1234')
+        # Envio mail (email desde el cual se envia, email destinatario, mensaje)
+        server.send("footprintsbmm@gmail.com", email, message)
+
+        # Salgo de la cuenta
+        server.quit()
+
+        respuesta = '0'
+
+    else:
+        respuesta = '1'
+
+    return HttpResponse(respuesta)
+
 
 
