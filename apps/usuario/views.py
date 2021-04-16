@@ -1,4 +1,5 @@
 import json
+import smtplib
 from uuid import uuid4
 
 from django.contrib.auth.views import LogoutView, auth_logout
@@ -90,3 +91,12 @@ def RegistroUsuarioMovil(request):
         usuario.save()
         respuesta = '0'
     return HttpResponse(respuesta)
+
+def RecoverPasswordMovil(request):
+    datos = json.loads(request.body)
+    email = datos['email']
+    if Usuario.objects.filter(email=email).exists():
+        usuario_existente = Usuario.objects.get(email=email)
+        usuario_password = usuario_existente.contrasena
+
+
